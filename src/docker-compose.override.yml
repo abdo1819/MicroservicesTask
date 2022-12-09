@@ -1,0 +1,55 @@
+
+version: '3.4'
+
+services:
+  orderdb:
+    container_name: orderdb
+    environment:
+        SA_PASSWORD: "a-test1234"
+        ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+        - "1433:1433"
+  cartdb:
+    container_name: cart
+    restart: always
+    ports:
+      - "6379:6379"
+
+  # https://github.com/wurstmeister/kafka-docker/wiki/Connectivity#kafka-in-docker
+  kafkabroker:
+    container_name: kafkabroker
+    restart: always
+    ports:
+      - 29092:29092
+    environment:
+      KAFKA_CREATE_TOPICS: "cartcheckout:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:29092
+    depends_on:
+      - zookeeper
+      
+
+  zookeeper:
+    container_name: zookeeper
+    restart: always
+    ports:
+      - 22181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      
+
+
+
+  cart.api:
+    container_name: cart.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSettings:ConnectionString=cartdb:6379"
+    depends_on:
+      - cartdb
+      - kafkabroker
+    ports:
+      - "8001:80"

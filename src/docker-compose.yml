@@ -1,0 +1,82 @@
+version: '3.4'
+
+services:
+
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2019-latest 
+  
+  # product-elasticsearch:
+  #   image: docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+  
+  cartdb:
+    image: redis:alpine
+
+  kafkabroker:
+    image: wurstmeister/kafka:2.13-2.8.1
+    depends_on:
+      - zookeeper
+
+
+  zookeeper:
+    image: zookeeper:3.5.9
+
+
+  cart.api:
+    image: cart.api
+    build:
+      context: .
+      dockerfile: Services/CartService/Cart.API/Dockerfile
+    depends_on:
+      - cartdb
+      - kafkabroker
+
+  # catalog-api:
+  #   image: ${REGISTRY:-eshop}/catalog.api:${PLATFORM:-linux}-${TAG:-latest}
+  #   build:
+  #     context: .
+  #     dockerfile: Services/Catalog/Catalog.API/Dockerfile
+  #   depends_on:
+  #     - sqldata
+  #     - rabbitmq
+
+  # ordering-api:
+  #   image: ${REGISTRY:-eshop}/ordering.api:${PLATFORM:-linux}-${TAG:-latest}
+  #   build:
+  #     context: .
+  #     dockerfile: Services/Ordering/Ordering.API/Dockerfile
+  #   depends_on:
+  #     - sqldata
+  #     - rabbitmq
+
+  # ordering-backgroundtasks:
+  #   image: ${REGISTRY:-eshop}/ordering.backgroundtasks:${PLATFORM:-linux}-${TAG:-latest}
+  #   build:
+  #     context: .
+  #     dockerfile: Services/Ordering/Ordering.BackgroundTasks/Dockerfile
+  #   depends_on:
+  #     - sqldata
+  #     - rabbitmq
+
+  # payment-api:
+  #   image: ${REGISTRY:-eshop}/payment.api:${PLATFORM:-linux}-${TAG:-latest}
+  #   build:
+  #     context: .
+  #     dockerfile: Services/Payment/Payment.API/Dockerfile
+  #   depends_on:
+  #     - rabbitmq
+
+  # mobileshoppingapigw:
+  #   image: envoyproxy/envoy:v1.11.1
+
+
+
+
+  # webstatus:
+  #   image: ${REGISTRY:-eshop}/webstatus:${PLATFORM:-linux}-${TAG:-latest}
+  #   build:
+  #     context: .
+  #     dockerfile: Web/WebStatus/Dockerfile
+
+
+  # webshoppingapigw:
+  #   image: envoyproxy/envoy:v1.11.1
