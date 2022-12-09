@@ -1,0 +1,45 @@
+@startuml useCase
+left to right direction
+
+actor customer
+
+package products {
+    usecase "view products" as viewProducts
+    usecase "search / filter products" as searchProducts
+    usecase "get recomindations" as getRecomindations 
+    ' get recomindations for home page
+    
+}
+
+customer --> viewProducts
+customer --> searchProducts
+customer --> getRecomindations
+
+package cart {
+    rectangle manageCart {
+    usecase "add to cart" as addToCart
+    usecase "remove from cart" as removeFromCart
+    usecase "view cart" as viewCart
+    }
+    usecase "set delivery info" as deliveryInfo
+    usecase "set payment info" as paymentInfo
+    ' for design simplicity, user will have just one delivery and payment info
+    ' that he can add at checkout 
+    ' in real system this should be attached to user profile
+    usecase "checkout" as checkout
+}
+customer --> manageCart
+customer --> checkout
+customer --> deliveryInfo
+customer --> paymentInfo
+
+' package customer {
+'     usecase "register" as register
+'     usecase "login" as login
+'     usecase "logout" as logout
+'     usecase "edit profile" as editProfile
+'     usecase "view profile" as viewProfile
+' }
+
+
+@enduml
