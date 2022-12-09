@@ -1,11 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Cart.API;
+namespace Cart.API.Model;
 
-public class Cart
+public class CartModel
 {
     [Required]
-    public ICollection<CartItem>? Items { get; set; }
+    public ICollection<CartLine>? Items { get; set; }
     public decimal totalPrice
     {
         get
@@ -15,7 +15,7 @@ public class Cart
             
             foreach (var item in Items)
             {
-                total += item.Price;
+                total += item.lineCost;
             }
             return total;
         }

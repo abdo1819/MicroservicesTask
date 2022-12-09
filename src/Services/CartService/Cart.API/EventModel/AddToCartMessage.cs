@@ -1,11 +1,12 @@
 using System.Text.Json;
 using Cart.API;
+using Cart.API.Model;
 using Confluent.Kafka;
 
 
 namespace Cart.API.EventModel;
-class AddToCartMessage:Message<Null,string>{
-    public AddToCartMessage(CartItem item){
+public class AddToCartMessage:Message<Null,string>{
+    public AddToCartMessage(CartLine item){
         Value = JsonSerializer.Serialize(item);
     }
 
