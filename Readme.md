@@ -161,12 +161,56 @@ order.cancel
 
 
 ## database
-- sql server
-- elasticsearch
-- redis
+- sql server (catalogdb, orderdb, paymentdb)
+- elasticsearch (productsearchdb)
+- redis (cartdb)
 
-## api gateway
-- nginx
+<!-- ## api gateway -->
+<!-- ## service discovery -->
 
-## service discovery
-- consul
+
+## used patterns
+### acrchitecture patterns
+- microservices
+```
+services are independent based in business domain
+with their own database and api interface and communicate to through message broker
+```
+- event driven
+```
+services communicate to each other through message broker
+```
+- saga
+```
+saga is used to handle order checkout process
+betwean cart , payment , order and warehouse service
+```
+- cqrs
+```
+cqrs is used to handle product data
+```
+
+
+### design patterns
+#### cart microservice
+<!-- https://martinfowler.com/eaaCatalog/repository.html -->
+- repository pattern 
+```
+seprate data access from business logic 
+used in cart repository with seprate implementation for redis
+```
+
+- singleton pattern (Creational PATTERNS)
+```
+used with message broker to make sure that only one instance of producer is created use same connection for all messaging
+```
+- 
+
+
+#### suggested patterns (not implemented) 
+#### product service
+- builder pattern (Creational PATTERNS)
+```
+build the search query from search parameters
+```
+
