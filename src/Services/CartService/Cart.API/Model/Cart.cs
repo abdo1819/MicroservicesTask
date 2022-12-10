@@ -4,6 +4,8 @@ namespace Cart.API.Model;
 
 public class CartModel
 {
+    [Key]
+    public Guid customerId { get; set; }
     [Required]
     public ICollection<CartLine>? Items { get; set; }
     public decimal totalPrice

@@ -5,11 +5,12 @@ using System.Text.Json;
 using Cart.API.EventModel;
 using Cart.API.Repastory;
 using Cart.API.Model;
+using System.Net;
 
 namespace Cart.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class CartController : ControllerBase
 {
     private readonly IKafkaDependentProducer<Null, string> _producer;
@@ -22,24 +23,37 @@ public class CartController : ControllerBase
     }
     
 
-    [HttpGet(Name = "GetCart")]
-    public IEnumerable<CartModel> Get([FromRoute] Guid cartId)
+    [HttpGet("{id}",Name = "GetCart")]
+    [ProducesResponseType(typeof(CartModel), (int)HttpStatusCode.OK)]
+
+    public async Task<ActionResult<CartModel>> Get(Guid customerId)
     {
-        return new List<CartModel>();
+        try{
+            var cart = await _cartRepastory.GetCart(customerId);
+            if (cart == null)
+            {
+                cart = await _cartRepastory.CreateCart(customerId);
+            }
+            return Ok(cart);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
     [HttpPost(Name = "AddToCart")]
-    public async Task<IActionResult> Post([FromBody] CartLine item, [FromRoute] Guid cartId)
+    public async Task<IActionResult> Post([FromBody] CartLine item, Guid customerId)
     {
         try
         {
             // check if cart exists or create new one
-            var cart = await _cartRepastory.GetCart(cartId);
+            var cart = await _cartRepastory.GetCart(customerId);
             if (cart == null)
             {
-                cartId = await _cartRepastory.Create();
+                cart = await _cartRepastory.CreateCart(customerId);
             }
             // add the item to the cart
-            await _cartRepastory.AddToCart(cartId, item);
+            await _cartRepastory.AddToCart(customerId, item);
             // publish the event of item addition
             var message = new AddToCartMessage(item);
             // TODO : make topic name configurable
