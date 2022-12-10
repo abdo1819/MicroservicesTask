@@ -287,3 +287,7 @@ this is done manually using postman
 - import `postman_collection.json` to postman from `Src/Services/CartService/CartService.API/Postman` folder
 
 
+# ref 
+- [microservices pattern chris richardson](https://microservices.io/book)
+- [dotnet-architecture/eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers)
+- [RailsEventStore/ecommerce](https://github.com/RailsEventStore/ecommerce)
