@@ -23,11 +23,15 @@ public class CartController : ControllerBase
     }
     
 
-    [HttpGet("{id}",Name = "GetCart")]
+    [HttpGet("{customerId}",Name = "GetCart")]
     [ProducesResponseType(typeof(CartModel), (int)HttpStatusCode.OK)]
 
     public async Task<ActionResult<CartModel>> Get(Guid customerId)
     {
+        if (customerId == Guid.Empty)
+        {
+            return BadRequest();
+        }
         try{
             var cart = await _cartRepastory.GetCart(customerId);
             if (cart == null)
