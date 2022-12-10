@@ -14,9 +14,9 @@ namespace Cart.API.Controllers;
 public class CartController : ControllerBase
 {
     private readonly IKafkaDependentProducer<Null, string> _producer;
-    private readonly ICartRepastory _cartRepastory;
+    private readonly ICartRepository _cartRepastory;
 
-    public CartController(IKafkaDependentProducer<Null, string> producer, ICartRepastory cartRepastory)
+    public CartController(IKafkaDependentProducer<Null, string> producer, ICartRepository cartRepastory)
     {
         _producer = producer;
         _cartRepastory = cartRepastory;
@@ -45,8 +45,8 @@ public class CartController : ControllerBase
             return BadRequest(e.Message);
         }
     }
-    [HttpPost(Name = "AddToCart")]
-    public async Task<IActionResult> Post([FromBody] CartLine item, Guid customerId)
+    [HttpPost("{customerId}",Name = "AddToCart")]
+    public async Task<IActionResult> Post(CartLine item, Guid customerId)
     {
         try
         {
@@ -57,7 +57,7 @@ public class CartController : ControllerBase
                 cart = await _cartRepastory.CreateCart(customerId);
             }
             // add the item to the cart
-            await _cartRepastory.AddToCart(customerId, item);
+            await _cartRepastory.SetItemInCart(customerId, item);
             // publish the event of item addition
             var message = new AddToCartMessage(item);
             // TODO : make topic name configurable
