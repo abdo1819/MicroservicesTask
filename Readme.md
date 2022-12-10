@@ -2,20 +2,21 @@
 
 this repository contains the homework for the floward task
 # content
-- [x] [Microsserice Desigen](##microsserice-desigen)
-- [ ] [desigen pattern i am goining to use](##used patterns)
-- [ ] [.net core demo application](##application demo)
-- [ ] [kafka intergration](##Kafaka integration)
-- [ ] [unit testing](##unit testing)
+- [Microsserice Desigen](#microsserice-desigen)
+- [desigen pattern to use](#used-patterns)
+- [.net core demo application](#application-demo)
+- [kafka intergration](##Kafaka-integration)
+- [unit testing](##unit-testing)
 
 
-## microsserice-desigen
-<!-- missing components -->
+# microsserice-desigen
+<!-- TDOO to be added components -->
 <!-- logging  -->
 <!-- service monitoring -->
 <!-- zoo keeper -->
+<!-- gateway -->
 
-## services
+# services
 - product service <!-- - cqrs  -->
 - product search
 - order service <!-- - saga  -->
@@ -107,6 +108,28 @@ manage payment data with persistent database (sql server)
 #### subscribe
 - `cart.checkout` subscribe when cart checkout to create payment invoice
 
+
+
+## warehouse service
+manage warehouse data with oltp database (sql server)
+
+### interface
+- none
+### topics actions
+#### publish
+- `warehouse.reserve` publish when warehouse reserve product
+- `warehouse.commit` publish when warehouse commit shipping
+```
+commit shipping requires a payment succeeded and order checkout event to be emited
+```
+- `warehouse.cancel` publish when warehouse cancel shipping
+
+#### subscribe
+- `cart.checkout` subscribe when cart checkout to reserve product
+- `payment.succeeded` subscribe when payment succeeded to commit shipping
+- `payment.failed` subscribe when payment failed to cancel shipping and remove reservation
+- `order.cancel` subscribe when order canceled to remove reservation 
+
 ## topics
 - `product.added` publish when new product added
 - `product.deleted` publish when product deleted
@@ -124,7 +147,7 @@ cart.checkout
 |
 |--> payment create invoice
 |
-|--> order create invalid order
+|--> order create Unpaid order
 |
 |--> warehouse reserve product
 |
@@ -144,7 +167,7 @@ payment.failed
 |
 |--> order cancel order
 |
-|--> warehouse remoce reservation
+|--> warehouse remove reservation
 ```
 
 ```
@@ -169,8 +192,8 @@ order.cancel
 <!-- ## service discovery -->
 
 
-## used patterns
-### acrchitecture patterns
+# used patterns
+## acrchitecture patterns
 - microservices
 ```
 services are independent based in business domain
@@ -191,8 +214,8 @@ cqrs is used to handle product data
 ```
 
 
-### design patterns
-#### cart microservice
+## design patterns
+### cart microservice
 <!-- https://martinfowler.com/eaaCatalog/repository.html -->
 - repository pattern 
 ```
@@ -207,10 +230,56 @@ used with message broker to make sure that only one instance of producer is crea
 - 
 
 
-#### suggested patterns (not implemented) 
+### suggested patterns (not implemented) 
 #### product service
 - builder pattern (Creational PATTERNS)
 ```
 build the search query from search parameters
 ```
+
+
+# application demo
+## overview
+this demo application with specified services and database
+and imlementationg for cart microservice
+
+## folder structure
+```c
+├── README.md
+├── Src
+|   ├── Services
+│       ├── CartService 
+│           ├── CartService.API 
+│           │── CartService.UnitTests
+├── docker-compose.yml
+├── docker-compose.override.yml
+├── diagrams
+```
+
+## CartService.API
+### overview
+- cart service api
+
+
+## run local-dev
+- switch to `Src` folder
+- run `docker-compose up` to run da (redis, kafka and zookeeper are used)
+- switch to `Src/Services/CartService/CartService.API` folder
+-  cart service api
+```bash
+dotnet run
+```
+
+
+## test 
+- switch to `Src/Services/CartService/CartService.UnitTests` folder
+- run unit tests
+```bash
+dotnet test
+```
+
+## integration tests
+this is done manually using postman 
+- import `postman_collection.json` to postman from `Src/Services/CartService/CartService.API/Postman` folder
+
 
