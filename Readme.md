@@ -184,7 +184,8 @@ order.cancel
 |--> product update product quantity
 ```
 
-
+### example for succesfull order checkout
+![services](./diagrams/imgs/sagaCheckout.svg)
 
 
 ## database
@@ -231,7 +232,7 @@ used in cart repository with seprate implementation for redis
 ```
 used with message broker to make sure that only one instance of producer is created use same connection for all messaging
 ```
-- 
+
 
 
 ### suggested patterns (not implemented) 
