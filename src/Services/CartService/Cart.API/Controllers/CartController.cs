@@ -46,7 +46,7 @@ public class CartController : ControllerBase
         }
     }
     [HttpPost("{customerId}",Name = "AddToCart")]
-    public async Task<IActionResult> Post(CartLine item, Guid customerId)
+    public async Task<IActionResult> Post(Guid customerId,CartLine item )
     {
         try
         {

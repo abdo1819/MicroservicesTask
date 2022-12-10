@@ -74,7 +74,7 @@ namespace Cart.UnitTest
             var controller = new CartController(_mockKafkaProducer.Object, _mockCartRepastory.Object);
 
             // Act
-            var result = controller.Post(item, customerId).Result;
+            var result = controller.Post(customerId,item).Result;
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(OkResult));
