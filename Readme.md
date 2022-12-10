@@ -24,7 +24,7 @@ this repository contains the homework for the floward task
 - payment service <!-- - saga  -->
 - warehouse service <!-- - saga  -->
 
-![services](./diagrams/imgs/serviceArch.svg)
+![services](./diagrams/imgs/serviceArch.png)
 
 ## product service
 manage products data with oltp database (sql server) 
