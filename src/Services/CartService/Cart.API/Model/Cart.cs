@@ -5,10 +5,10 @@ namespace Cart.API.Model;
 public class CartModel
 {
     [Key]
-    public Guid customerId { get; set; }
+    public Guid CustomerId { get; set; }
     [Required]
-    public ICollection<CartLine>? Items { get; set; }
-    public decimal totalPrice
+    public List<CartLine>? Items { get; set; }
+    public decimal TotalPrice
     {
         get
         {
