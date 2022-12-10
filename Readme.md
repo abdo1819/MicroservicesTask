@@ -21,6 +21,10 @@ this repository contains the homework for the floward task
 - product search
 - order service <!-- - saga  -->
 - cart service 
+- payment service <!-- - saga  -->
+- warehouse service <!-- - saga  -->
+
+![services](./diagrams/imgs/serviceArch.svg)
 
 ## product service
 manage products data with oltp database (sql server) 
