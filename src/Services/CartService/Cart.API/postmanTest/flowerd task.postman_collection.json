@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "bc21ed5d-f69d-4eac-beef-7196fda308b2",
+		"name": "flowerd task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12668728"
+	},
+	"item": [
+		{
+			"name": "bad request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "emptyCartCreate",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "addItemToCart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"item\":{\r\n    \"CartLineId\":\"9c0fbacb-3771-4470-ad28-b9aacd0ff4f5\",\r\n    \"ProductId\":\"9c0fbacb-3771-4470-ad28-b9aacd0ff4f6\",\r\n    \"CartId\":\"9c0fbacb-3771-4470-ad28-b9aacd0ff4f2\",\r\n    \"Price\":\"120\",\r\n    \"Quantity\":\"5\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5091/api/Cart/9c0fbacb-3771-4470-ad28-b9aacd0ff4f2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5091",
+					"path": [
+						"api",
+						"Cart",
+						"9c0fbacb-3771-4470-ad28-b9aacd0ff4f2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
