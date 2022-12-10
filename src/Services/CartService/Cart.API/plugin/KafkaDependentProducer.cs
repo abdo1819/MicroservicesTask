@@ -36,7 +36,7 @@ namespace Cart.API.Plugin.Kafka
     {
         IProducer<K, V> kafkaHandle;
 
-        public KafkaDependentProducer(KafkaClientHandle handle)
+        public KafkaDependentProducer(IKafkaClientHandle handle)
         {
             kafkaHandle = new DependentProducerBuilder<K, V>(handle.Handle).Build();
         }

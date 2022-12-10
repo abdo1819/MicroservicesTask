@@ -21,6 +21,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace Cart.API.Plugin.Kafka
 {
+    public interface IKafkaClientHandle
+    {
+        Handle Handle { get; }
+
+        void Dispose();
+    }
+
     /// <summary>
     ///     Wraps a Confluent.Kafka.IProducer instance, and allows for basic
     ///     configuration of this via IConfiguration.
@@ -34,7 +41,7 @@ namespace Cart.API.Plugin.Kafka
     ///     Confluent.Kafka.IProducer instances for each Message type you wish to
     ///     produce.
     /// </summary>
-    public class KafkaClientHandle : IDisposable
+    public class KafkaClientHandle : IDisposable, IKafkaClientHandle
     {
         IProducer<byte[], byte[]> kafkaProducer;
 
