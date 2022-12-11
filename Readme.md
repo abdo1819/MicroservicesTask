@@ -184,7 +184,7 @@ order.cancel
 ```
 
 ### example for succesfull order checkout
-![services](./diagrams/imgs/sagaCheckout.svg)
+![services](./diagrams/imgs/sagaCheckout.png)
 
 
 ## database
