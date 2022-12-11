@@ -5,8 +5,7 @@ this repository contains the homework for the floward task
 - [Microsserice Desigen](#microsserice-desigen)
 - [desigen pattern to use](#used-patterns)
 - [.net core demo application](#application-demo)
-- [kafka intergration](##Kafaka-integration)
-- [unit testing](##unit-testing)
+- [unit testing](#test)
 
 
 # microsserice-desigen
