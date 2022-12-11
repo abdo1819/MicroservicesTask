@@ -264,6 +264,7 @@ and imlementationg for cart microservice
 ### overview
 - cart service api
 ![diagram](./diagrams/imgs/CartDiagram.png)
+\* service is not implemented in this demo
 
 ## run local-dev
 - switch to `Src` folder
@@ -287,6 +288,11 @@ unit testing here is applied to the cart controller for `get cart` and `add prod
 ```bash
 dotnet test
 ```
+
+### test demo
+[![](https://markdown-videos.deta.dev/youtube/nn6P6tEUR1Y)](https://youtu.be/nn6P6tEUR1Y)
+
+
 
 ## integration tests
 this is done manually using postman 
