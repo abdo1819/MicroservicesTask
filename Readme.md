@@ -264,7 +264,7 @@ and imlementationg for cart microservice
 ## CartService.API
 ### overview
 - cart service api
-![diagram](./diagrams/imgs/CartDiagram.svg)
+![diagram](./diagrams/imgs/CartDiagram.png)
 
 ## run local-dev
 - switch to `Src` folder
