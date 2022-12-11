@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="WOn5wwiRH83vvZWBE0tc" name="Page-1">
-        <mxGraphModel dx="861" dy="492" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="600" pageHeight="1600" background="#1A1A1A" math="0" shadow="0">
+        <mxGraphModel dx="438" dy="492" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="600" pageHeight="1600" background="#1A1A1A" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -140,8 +140,8 @@
                 <mxCell id="60" value="Payment Service" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.android;fillColor=#115193;gradientColor=none;fontColor=#FCF5FF;" parent="58" vertex="1">
                     <mxGeometry x="40" y="15" width="43.75" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="61" value="payment db" style="sketch=0;aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/mscae/Cache_Redis_Product.svg;fontColor=#FCF5FF;" parent="58" vertex="1">
-                    <mxGeometry x="190" y="23" width="50" height="42" as="geometry"/>
+                <mxCell id="94" value="warehousedb&lt;br&gt;" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.ms_sql_instance;fillColor=#2E73B8;gradientColor=none;fontColor=#FCF5FF;" vertex="1" parent="58">
+                    <mxGeometry x="190" y="20.5" width="41.4" height="44.5" as="geometry"/>
                 </mxCell>
                 <mxCell id="65" style="edgeStyle=none;rounded=1;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontColor=#FCF5FF;fillColor=#1ba1e2;strokeColor=#006EAF;strokeWidth=2;" parent="12" target="22" edge="1">
                     <mxGeometry relative="1" as="geometry">
