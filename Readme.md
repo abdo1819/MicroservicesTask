@@ -276,6 +276,12 @@ dotnet run
 
 
 ## test 
+unit testing here is applied to the cart controller for `get cart` and `add product to cart` actions
+### used libraries
+- used `mstest` as test framework
+- used `moq` to mock the cart repository and kakfa producer
+
+
 - switch to `Src/Services/CartService/CartService.UnitTests` folder
 - run unit tests
 ```bash
